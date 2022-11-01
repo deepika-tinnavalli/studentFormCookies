@@ -65,6 +65,15 @@
                 document.getElementById("max").innerHTML = "";
                 return
             }
+            for (var i =0; i<arrOfNum.length; i++){
+                console.log(arrOfNum[i])
+                if (arrOfNum[i]>100){
+                    document.getElementById("errorRaffle").innerHTML = "Enter number less than 100";
+                    document.getElementById("avg").innerHTML = "";
+                    document.getElementById("max").innerHTML = "";
+                    return
+                }
+            }
             var max = Math.max.apply(Math, arrOfNum)
             var sum = 0;
             for (var i = 0; i < arrOfNum.length; i++) {
