@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        body {
+            background-image: url('E:\GMU\Fall22\SWE642\assign1\assign1\download.png');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+    </style>
+
+    <script>
+        document.cookie = "flavor=choco; SameSite=Lax; Secure";
+        function setCookie(cname, cvalue, exdays) {
+            const d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            let expires = "expires=" + d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+
+        function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function checkCookie() {
+            let user = getCookie("username");
+            console.log(user)
+            if (user != "") {
+                alert("Welcome again " + user);
+            } else {
+                user = prompt("Please enter your name:", "");
+                if (user != "" && user != null) {
+                    setCookie("username", user, 30);
+                }
+            }
+        }
+        function reset() {
+            document.cookie = 'username=' + '""; expires=Thu, 01-Jan-1970 00:00:01 GMT;path=/';
+            location.reload();
+        }
+
+        function calcMaxAndAvg() {
+            var ip = document.getElementById("fnum").value
+            var arr = ip.split(",")
+            var arrOfNum = arr.map(str => {
+                return Number(str);
+            });
+            if (arrOfNum.length < 10) {
+                document.getElementById("errorRaffle").innerHTML = "Enter minimum of 10 numbers";
+                document.getElementById("avg").innerHTML = "";
+                document.getElementById("max").innerHTML = "";
+                return
+            }
+            var max = Math.max.apply(Math, arrOfNum)
+            var sum = 0;
+            for (var i = 0; i < arrOfNum.length; i++) {
+                sum += arrOfNum[i];
+            }
+            var avg = sum / arrOfNum.length;
+            document.getElementById("errorRaffle").innerHTML = "";
+            document.getElementById("avg").innerHTML = "Average: " + avg;
+            document.getElementById("max").innerHTML = "Maximum: " + max;
+        }
+
+    </script>
+</head>
+
+<body>
+
+    <body>
+        <p id="demo"></p>
+
+        <script>
+            checkCookie()
+            const time = new Date().getHours();
+            let greeting;
+            if (time < 10) {
+                greeting = "<h1>Good morning ";
+            } else if (time < 20) {
+                greeting = "<h1>Good Afternoon ";
+            } else {
+                greeting = "<h1>Good evening ";
+            }
+            document.getElementById("demo").innerHTML = greeting + getCookie("username");
+            document.writeln("<a href = 'javascript:reset()'> " + "Click here if you are not " + getCookie("username") + "</a>");
+        </script>
+
+    </body>
+
+
+
+
+    <head>
+        <meta charset=" UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Build a Survey Form using HTML and CSS
+        </title>
+        <!DOCTYPE html>
+
+
+
+        <style>
+            /* Styling the Body element i.e. Color,
+        Font, Alignment */
+            body {
+                /* background-color: #05c4; */
+                background-color: #FFCC33;
+                font-family: Verdana;
+                text-align: center;
+            }
+
+            /* Styling the Form (Color, Padding, Shadow) */
+            form {
+                background-color: #fff;
+                max-width: 500px;
+                margin: 50px auto;
+                padding: 30px 20px;
+                box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
+            }
+
+            /* Styling form-control Class */
+            .form-control {
+                text-align: left;
+                margin-bottom: 25px;
+            }
+
+            /* Styling form-control Label */
+            .form-control label {
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            /* Styling form-control input,
+        select, textarea */
+            .form-control input,
+            .form-control select,
+            .form-control textarea {
+                border: 1px solid #777;
+                border-radius: 2px;
+                font-family: inherit;
+                padding: 10px;
+                display: block;
+                width: 95%;
+            }
+
+            /* Styling form-control Radio
+        button and Checkbox */
+            .form-control input[type="radio"],
+            .form-control input[type="checkbox"] {
+                display: inline-block;
+                width: auto;
+            }
+
+            /* Styling Button */
+            button {
+                background-color: #05c46b;
+                border: 1px solid #777;
+                border-radius: 2px;
+                font-family: inherit;
+                font-size: 21px;
+                display: block;
+                width: 100%;
+                margin-top: 50px;
+                margin-bottom: 20px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Student Survey Form</h1>
+
+        <!-- Create Form -->
+        <form id="form" autocomplete="on">
+
+            <!-- Details -->
+            <div class="form-control">
+                <label for="fname" id="label-fname">
+                    First Name*
+                </label>
+
+                <!-- Input Type Text -->
+                <input type="text" id="fname" placeholder="Enter your first name" required />
+            </div>
+
+            <div class="form-control">
+                <label for="lname" id="label-lname">
+                    Last Name*
+                </label>
+
+                <!-- Input Type Text -->
+                <input type="text" id="lname" placeholder="Enter your last name" required />
+            </div>
+
+            <div class="form-control">
+                <label for="address" id="label-address">
+                    Street Address*
+                </label>
+
+                <!-- Input Type Email-->
+                <input type="text" id="address" placeholder="Enter your street address" required />
+            </div>
+
+            <div class="form-control">
+                <label for="city" id="label-city">
+                    City*
+                </label>
+
+                <!-- Input Type Text -->
+                <input type="text" id="city" placeholder="Enter your city name" required />
+            </div>
+
+            <div class="form-control">
+                <label for="state" id="label-state">
+                    State
+                </label>
+
+                <!-- Input Type Text -->
+                <input type="text" id="state" placeholder="Enter your state name" />
+            </div>
+
+            <div class="form-control">
+                <label for="zip" id="label-zip">
+                    Zip
+                </label>
+
+                <!-- Input Type Text -->
+                <input type="text" id="zip" placeholder="Enter your zip code" />
+            </div>
+
+            <div class="form-control">
+                <label for="tno." id="label-tno.">
+                    Telephone Number*
+                </label>
+
+                <!-- Input Type Text -->
+                <input type="text" id="tno." placeholder="Enter your Telephone Number" required />
+            </div>
+
+            <div class="form-control">
+                <label for="email" id="label-email">
+                    Email*
+                </label>
+
+                <!-- Input Type Text -->
+                <input type="email" id="email" placeholder="Enter your email" required />
+            </div>
+            <div class="form-control">
+                <label for="Graduation Date" id="grad-date">
+                    Graduation Date
+                </label>
+
+                <!-- Input Type Text -->
+
+                <select name="month" id="month">
+                    <option value="January">January</option>
+                    <option value="February">February</option>
+                    <option value="March">March</option>
+                    <option value="April">April</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
+                </select>
+                <input type="text" id="year" placeholder="Enter year" />
+            </div>
+
+            <div class="form-control">
+                <label for="date" id="label-date">
+                    Date
+                </label>
+                <!-- Input Type Text -->
+                <input type="date" id="date" placeholder="Enter date of survey" />
+            </div>
+
+
+            <div class="form-control">
+                <label>Liked most about the Campus
+                    <small>(Check all that apply)</small>
+                </label>
+                <!-- Input Type Checkbox -->
+                <label for="inp-1">
+                    <input type="checkbox" name="inp">Students</input></label>
+                <label for="inp-2">
+                    <input type="checkbox" name="inp">Location</input></label>
+                <label for="inp-3">
+                    <input type="checkbox" name="inp">Campus</input></label>
+                <label for="inp-4">
+                    <input type="checkbox" name="inp">Atmosphere</input></label>
+                <label for="inp-5">
+                    <input type="checkbox" name="inp">Dorm rooms</input></label>
+                <label for="inp-6">
+                    <input type="checkbox" name="inp">Sports</input></label>
+                <label for="inp-7">
+
+            </div>
+
+            <div class="form-control">
+                <label>
+                    What made interest towards the University?
+                </label>
+
+                <!-- Input Type Radio Button -->
+                <label for="recommed-0">
+                    <input type="radio" id="recommed-0" name="recommed">University Website</input>
+                </label>
+                <label for="recommed-1">
+                    <input type="radio" id="recommed-1" name="recommed">Professors</input>
+                </label>
+                <label for="recommed-2">
+                    <input type="radio" id="recommed-2" name="recommed">Cirriculum</input>
+                </label>
+                <label for="recommed-3">
+                    <input type="radio" id="recommed-3" name="recommed">Friends</input>
+                </label>
+                <label for="recommed-4">
+                    <input type="radio" id="recommed-4" name="recommed">Television</input>
+                </label>
+                <label for="recommed-5">
+                    <input type="radio" id="recommed-5" name="recommed">Internet</input>
+                </label>
+            </div>
+
+            <div class="form-control">
+                <label for="role" id="label-role">
+                    Recommending to others
+                </label>
+
+                <!-- Dropdown options -->
+                <select name="role" id="role">
+                    <option value="very">Select</option>
+                    <option value="very">Very Likely</option>
+                    <option value="like">Likely</option>
+                    <option value="un">Unlikely </option>
+                </select>
+            </div>
+            <script>
+                function averageMaximum() {
+
+                }
+            </script>
+
+            <div class="form-control">
+                <form>
+                    <label for="fname">Data:</label>
+                    <label>
+                        Enter numbers between 1 to 100
+                    </label>
+                    <input type="text" id="fnum" name="fnum" onfocusout="calcMaxAndAvg()"><br>
+                    <p id="errorRaffle"></p>
+                    <div id="max"></div>
+                    <div id="avg"></div>
+                </form>
+            </div>
+
+
+
+            <div class="form-control">
+                <label for="comment">
+                    Any comments or suggestions
+                </label>
+
+                <!-- multi-line text input control -->
+                <textarea name="comment" id="comment" placeholder="Enter your comment here">
+            </textarea>
+            </div>
+
+            <!-- Multi-line Text Input Control -->
+            <button type="submit" value="submit">
+                Submit
+            </button>
+
+            <!-- Multi-line Text Input Control -->
+            <button type="cancel" value="cancel">
+                Cancel
+            </button>
+        </form>
+        <footer class="w3-center w3-light-grey w3-padding-48 w3-large">
+
+            <a href="https://volgenau.gmu.edu/">
+                <img style="float:right" src="images.jpg" alt="mason logo" width="200" height="150"
+                    href="https://www.gmu.edu/">
+            </a>
+        </footer>
+    </body>
+</body>
+
+</html>
